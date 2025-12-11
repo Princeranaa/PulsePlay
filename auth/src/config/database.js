@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
-import config from '../config/config'
+import config from '../config/config.js'
 
-exports.connectToDb = ()=>{
+export const connectToDb = async()=>{
     try {
-        mongoose.connect(config.MONGO_URL)
+        await mongoose.connect(config.MONGO_URL);
+        console.log("Mongoose connection success")
     } catch (error) {
         console.log("Mongoose connection error",error)
     }
