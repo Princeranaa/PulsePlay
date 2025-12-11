@@ -48,6 +48,63 @@ export const register = async (req,res) => {
     }
 }
 
+export const googleAuthCallback = async(req,res)=>{
+    const user = req.user;
+
+
+    const isUserAlreadyExists = await userModel.findOne({
+        $or: [
+            { email: user.emails[ 0 ].value },
+            { googleId: user.id }
+        ]
+    })
+
+
+
+    if (isUserAlreadyExists) {
+        const token = jwt.sign({
+            id: isUserAlreadyExists._id,
+            role: isUserAlreadyExists.role,
+            fullname: isUserAlreadyExists.fullname
+        }, config.JWT_SECRET, { expiresIn: "2d" })
+
+        res.cookie("token", token)
+
+        // if (isUserAlreadyExists.role === 'artist') {
+        //     return res.redirect('http://localhost:5173/artist/dashboard'); // Redirect to your frontend URL
+        // }
+
+        // return res.redirect('http://localhost:5173'); // Redirect to your frontend URL
+    }
+
+    const newUser = await userModel.create({
+        googleId: user.id,
+        email: user.emails[ 0 ].value,
+        fullname: {
+            firstName: user.name.givenName,
+            lastName: user.name.familyName
+        }
+    })
+
+    // await publishToQueue("user_created", {
+    //     id: newUser._id,
+    //     email: newUser.email,
+    //     fullname: newUser.fullname,
+    //     role: newUser.role
+    // })
+
+    const token = jwt.sign({
+        id: newUser._id,
+        role: newUser.role,
+        fullname: newUser.fullname
+    }, config.JWT_SECRET, { expiresIn: "2d" })
+
+    res.cookie("token", token)
+
+
+
+    // res.redirect('http://localhost:5173'); 
+}
 
 
 
