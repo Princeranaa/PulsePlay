@@ -7,6 +7,7 @@ const _config = {
   JWT_SECRET: process.env.JWT_SECRET,
   Client_Secret: process.env.Client_Secret,
   Client_ID: process.env.Client_ID,
+  RABBITMQ_URI: process.env.RABBITMQ_URI,
 };
 
 export default _config;
