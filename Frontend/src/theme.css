@@ -1,0 +1,84 @@
+:root {
+  /* Color Palette - Premium HSL based */
+  /* Primary: Vibrant Purple */
+  --color-primary: 260 100% 65%;
+  /* Secondary: Electric Cyan */
+  --color-secondary: 190 100% 50%;
+  /* Accent: Hot Pink */
+  --color-accent: 330 100% 60%;
+
+  /* Neutral tones for Dark Theme */
+  --color-background: 225 30% 8%; /* Very dark blue-grey */
+  --color-surface: 225 25% 12%; /* Slightly lighter */
+  --color-surface-hover: 225 20% 16%;
+  --color-border: 225 20% 20%;
+
+  /* Text Colors */
+  --text-main: 220 10% 98%;
+  --text-secondary: 220 10% 70%;
+  --text-muted: 220 10% 50%;
+
+  /* Functional Colors */
+  --color-success: 150 60% 45%;
+  --color-warning: 35 90% 55%;
+  --color-error: 0 85% 60%;
+  --color-info: 210 90% 60%;
+
+  /* Spacing System */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3rem;
+
+  /* Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* Radii */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+  --shadow-glow: 0 0 20px hsl(var(--color-primary) / 0.4);
+
+  /* Animations */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease-in-out;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Helper Utilities for Colors */
+.text-primary { color: hsl(var(--color-primary)); }
+.text-secondary { color: hsl(var(--color-secondary)); }
+.bg-primary { background-color: hsl(var(--color-primary)); }
+.bg-surface { background-color: hsl(var(--color-surface)); }

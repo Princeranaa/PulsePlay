@@ -1,0 +1,312 @@
+/* Container - Mobile First (Full Screen) */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: var(--space-md);
+  background-color: hsl(var(--color-background));
+}
+
+/* Card - Responsive Component */
+.register-card {
+  width: 100%;
+  background-color: hsl(var(--color-surface));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-xl);
+  
+  /* Flex layout for content */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Header Section */
+.register-header {
+  text-align: center;
+}
+
+.register-header h1 {
+  font-size: var(--text-2xl); /* Smaller on mobile */
+  margin-bottom: var(--space-xs);
+  color: hsl(var(--text-main));
+}
+
+.register-header p {
+  color: hsl(var(--text-secondary));
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+/* Form Layout */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column; /* Stack by default on mobile */
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: var(--text-sm);
+  color: hsl(var(--text-secondary));
+  font-weight: var(--font-medium);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem var(--space-md);
+  background-color: hsl(var(--color-background));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-main));
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: hsl(var(--color-primary));
+  box-shadow: 0 0 0 2px hsl(var(--color-primary) / 0.2);
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: hsl(var(--color-primary));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  margin-top: var(--space-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  color: hsl(var(--text-muted));
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.divider span {
+  padding: 0 var(--space-md);
+}
+
+/* Social Button */
+.btn-google {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.875rem;
+  background-color: transparent;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-main));
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.btn-google:hover {
+  background-color: hsl(var(--color-surface-hover));
+  border-color: hsl(var(--color-primary));
+}
+
+.google-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Footer */
+.register-footer {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: hsl(var(--text-secondary));
+}
+
+.register-footer a {
+  color: hsl(var(--color-primary));
+  font-weight: var(--font-bold);
+}
+
+/* --- NEW STYLES FOR RADIO BUTTONS --- */
+.radio-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs); /* Use a small gap */
+}
+
+.radio-label-main {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: hsl(var(--text-secondary));
+}
+
+.radio-options-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  flex: 1; /* Makes them take up equal space */
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.radio-option:has(input:checked) {
+  background-color: hsl(var(--color-primary) / 0.1); /* Subtle primary color background */
+  border-color: hsl(var(--color-primary));
+}
+
+.radio-option input[type="radio"] {
+  /* Resetting default browser style for a better look */
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid hsl(var(--color-border));
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0; /* Prevents radio button from shrinking */
+  transition: var(--transition-fast);
+}
+
+.radio-option input[type="radio"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: hsl(var(--color-primary));
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: hsl(var(--color-primary));
+}
+
+.radio-option input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.radio-option label {
+  /* Style for the label next to the radio button */
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: hsl(var(--text-main));
+  cursor: pointer;
+}
+/* ----------------------------------- */
+
+/* Existing styles below */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: hsl(var(--color-background));
+  padding: var(--space-md);
+}
+
+/* ... rest of your CSS ... */
+
+@media (max-width: 600px) {
+  .register-card {
+    padding: var(--space-lg);
+  }
+  .form-row {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  /* NEW: Adjust radio buttons on small screens */
+  .radio-options-row {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}
+
+
+
+
+
+/* --- Media Queries --- */
+
+/* Tablet & Up (>= 600px) */
+@media (min-width: 600px) {
+  .register-card {
+    max-width: 480px; /* Fixed width for larger screens */
+    padding: var(--space-2xl);
+  }
+
+  .register-header h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .form-row {
+    flex-direction: row; /* Side-by-side inputs */
+  }
+
+  .form-group {
+    flex: 1;
+  }
+}
+
+/* Desktop & Up (>= 1024px) */
+@media (min-width: 1024px) {
+  .register-container {
+    padding: var(--space-xl);
+  }
+
+  .register-card {
+    /* Slightly wider or different layout if needed, but 480px is usually good for forms */
+    max-width: 520px; 
+    box-shadow: var(--shadow-2xl); /* More dramatic shadow on large screens */
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 4px 12px hsl(var(--color-primary) / 0.3);
+    transform: translateY(-2px);
+  }
+}
