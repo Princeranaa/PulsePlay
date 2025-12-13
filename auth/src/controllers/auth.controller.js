@@ -30,7 +30,9 @@ export const register = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user._id, role: user.role,
+        fullname: user.fullname,
+       },
       config.JWT_SECRET,
       { expiresIn: "2d" }
     );
@@ -79,11 +81,11 @@ export const googleAuthCallback = async (req, res) => {
 
     res.cookie("token", token);
 
-    // ✔ FIX: STOP here. Don't continue.
-    return res.status(200).json({
-      message: "Login successful",
-      user: isUserAlreadyExists,
-    });
+    if (isUserAlreadyExists.role === "artist") {
+      return res.redirect("http://localhost:5173/artist/dashboard"); // Redirect to your frontend URL
+    }
+
+    return res.redirect("http://localhost:5173");
   }
 
   const newUser = await userModel.create({
@@ -114,40 +116,43 @@ export const googleAuthCallback = async (req, res) => {
 
   res.cookie("token", token);
 
-  // res.redirect('http://localhost:5173');
+  res.redirect("http://localhost:5173");
 };
 
+export const login = async (req, res) => {
+  const { email, password } = req.body;
 
-export const login = async(req,res)=>{
- const { email, password } = req.body;
+  const user = await userModel.findOne({ email });
 
-    const user = await userModel.findOne({ email })
+  if (!user) {
+    return res.status(400).json({ message: "Invalid email or password" });
+  }
 
-    if (!user) {
-        return res.status(400).json({ message: "Invalid email or password" });
-    }
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(400).json({ message: "Invalid email or password" });
+  }
 
-    if (!isPasswordValid) {
-        return res.status(400).json({ message: "Invalid email or password" });
-    }
+  const token = jwt.sign(
+    {
+      id: user._id,
+      role: user.role,
+      fullname: user.fullname,
+    },
+    config.JWT_SECRET,
+    { expiresIn: "2d" }
+  );
 
-    const token = jwt.sign({
-        id: user._id,
-        role: user.role,
-        fullname: user.fullname
-    }, config.JWT_SECRET, { expiresIn: "2d" })
+  res.cookie("token", token);
 
-    res.cookie("token", token)
-
-    res.status(200).json({
-        message: "User logged in successfully",
-        user: {
-            id: user._id,
-            email: user.email,
-            fullname: user.fullname,
-            role: user.role
-        }
-    })
-}
+  res.status(200).json({
+    message: "User logged in successfully",
+    user: {
+      id: user._id,
+      email: user.email,
+      fullname: user.fullname,
+      role: user.role,
+    },
+  });
+};
