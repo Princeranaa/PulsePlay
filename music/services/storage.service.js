@@ -23,3 +23,9 @@ export const uploadFile = async (file) => {
   });
   return response;
 };
+
+
+export const getFileUrl = (fileId) => {
+  if (!fileId) return null;
+  return imageKit.url({ src: fileId });
+};
