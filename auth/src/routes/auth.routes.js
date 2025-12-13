@@ -1,10 +1,11 @@
 import express from "express";
 const router = express.Router();
-import {googleAuthCallback, register} from '../controllers/auth.controller.js'
+import {googleAuthCallback, register,login} from '../controllers/auth.controller.js'
 import * as validationRules from '../Middlewares/Validation.middleware.js'
 import passport from 'passport';
 
 router.post('/register', validationRules.registerValidation, register);
+router.post('/login', validationRules.loginValidation, login);
 
 // Route to initiate Google OAuth flow
 router.get('/google',

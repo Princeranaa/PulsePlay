@@ -1,0 +1,223 @@
+/* =========================
+   Login Container
+========================= */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* fallback */
+  min-height: 100svh; /* FIX: prevents scrollbar */
+  width: 100%;
+  padding: var(--space-md);
+  background-color: hsl(var(--color-background));
+  
+}
+
+/* =========================
+   Login Card
+========================= */
+.login-card {
+  width: 100%;
+  background-color: hsl(var(--color-surface));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-xl);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* =========================
+   Header
+========================= */
+.login-header {
+  text-align: center;
+}
+
+.login-header h1 {
+  font-size: var(--text-2xl);
+  color: hsl(var(--text-main));
+  margin-bottom: var(--space-xs);
+}
+
+.login-header p {
+  font-size: var(--text-sm);
+  color: hsl(var(--text-secondary));
+}
+
+/* =========================
+   Form
+========================= */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: hsl(var(--text-secondary));
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem var(--space-md);
+  background-color: hsl(var(--color-background));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-main));
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-group input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: hsl(var(--color-primary));
+  background-color: hsl(var(--color-surface));
+  box-shadow: 0 0 0 2px hsl(var(--color-primary) / 0.25);
+}
+
+/* =========================
+   Primary Button
+========================= */
+.btn-primary {
+  width: 100%;
+  padding: 0.875rem;
+  margin-top: var(--space-sm);
+  background-color: hsl(var(--color-primary));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-base), background-color var(--transition-base);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   Divider
+========================= */
+.divider {
+  display: flex;
+  align-items: center;
+  color: hsl(var(--text-muted));
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.divider span {
+  padding: 0 var(--space-md);
+}
+
+/* =========================
+   Google Button
+========================= */
+.btn-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.875rem;
+  background-color: transparent;
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  color: hsl(var(--text-main));
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+    border-color var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-google:hover {
+  background-color: hsl(var(--color-surface-hover));
+  border-color: hsl(var(--color-primary));
+  transform: translateY(-1px);
+}
+
+.google-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* =========================
+   Footer
+========================= */
+.login-footer {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: hsl(var(--text-secondary));
+}
+
+.login-footer a {
+  color: hsl(var(--color-primary));
+  font-weight: var(--font-bold);
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+/* Tablet & Up */
+@media (min-width: 600px) {
+  .login-card {
+    max-width: 480px;
+    padding: var(--space-2xl);
+  }
+
+  .login-header h1 {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* Desktop & Up */
+@media (min-width: 1024px) {
+  .login-container {
+   
+    padding: var(--space-xl);
+  }
+
+  .login-card {
+    max-width: 520px;
+    /* max-height: 600px; */
+    box-shadow: var(--shadow-xl);
+  }
+}

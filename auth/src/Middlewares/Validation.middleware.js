@@ -16,3 +16,9 @@ export const registerValidation = [
     body('fullname.lastname').notEmpty().withMessage('Last name is required'),
     validate
 ]
+
+export const loginValidation = [
+    body('email').isEmail().withMessage('Invalid email'),
+    body('password').isLength({min:6}).withMessage('Password must be at least 6 characters long'),
+    validate
+]

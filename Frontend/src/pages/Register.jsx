@@ -38,7 +38,7 @@ function Register() {
         payload, 
         { withCredentials: true }
       );
-      console.log("responseData------> ", response.data);
+   
       navigate("/");
     } catch (error) {
       console.error(
