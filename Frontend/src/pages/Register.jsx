@@ -35,10 +35,10 @@ function Register() {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/auth/register",
-        payload, 
+        payload,
         { withCredentials: true }
       );
-   
+
       navigate("/");
     } catch (error) {
       console.error(
@@ -144,7 +144,13 @@ function Register() {
           <span>or continue with</span>
         </div>
 
-        <button type="button" className="btn-google">
+        <button
+          onClick={() => {
+            window.location.href = "http://localhost:3000/api/auth/google";
+          }}
+          type="button"
+          className="btn-google"
+        >
           <svg
             className="google-icon"
             viewBox="0 0 24 24"
