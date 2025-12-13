@@ -10,6 +10,7 @@ export const register = async (req, res) => {
       email,
       fullname: { firstname, lastname },
       password,
+      role,
     } = req.body;
 
     const isUserExist = await userModel.findOne({ email });
@@ -27,6 +28,7 @@ export const register = async (req, res) => {
       email,
       fullname: { firstname, lastname },
       password: hash,
+      role
     });
 
     const token = jwt.sign(
@@ -120,6 +122,7 @@ export const googleAuthCallback = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+ 
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email });
