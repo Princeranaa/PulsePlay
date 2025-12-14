@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import multer from 'multer'
-import  {uploadMusic,getArtistMusic }  from '../controllers/music.controller.js';
+import  {uploadMusic,getArtistMusic,createPlaylist }  from '../controllers/music.controller.js';
 import { authArtistMiddleware } from '../middleware/auth.middleware.js';   
 
 const upload = multer({
@@ -14,6 +14,10 @@ router.post('/upload', upload.fields([
 ]), authArtistMiddleware, uploadMusic);
 
 router.get('/artist-music', authArtistMiddleware, getArtistMusic);
+
+
+/* POST /api/music/playlist */
+router.post('/playlist', authArtistMiddleware, createPlaylist)
 
 
 

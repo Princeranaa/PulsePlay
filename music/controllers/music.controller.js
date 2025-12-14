@@ -1,5 +1,6 @@
 import { getFileUrl, uploadFile } from "../services/storage.service.js";
 import { musicModel } from "../model/music.model.js";
+import { playlistModel } from "../model/playlist.model.js";
 
 export const uploadMusic = async (req, res) => {
   const music = req.files.music[0];
@@ -70,3 +71,23 @@ export const getArtistMusic = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const createPlaylist = async (req, res) => {
+    const { title, musics } = req.body;
+
+    try {
+        const playlist = await playlistModel.create({
+            artist: req.user.fullname.firstname + " " + req.user.fullname.lastname,
+            artistId: req.user?.id,
+            title,
+            userId: req.user?.id,
+            musics
+        })
+
+        return res.status(201).json({ message: 'Playlist created successfully', playlist });
+
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+} 
