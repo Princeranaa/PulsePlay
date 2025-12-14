@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ArtistDashboard from "./artist/ArtistDashboard";
+import UploadMusic from "./artist/UploadMusic";
 
 function App() {
   return (
@@ -13,11 +14,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/artist/dashboard" element={<ArtistDashboard />} />
-          {/* <Route
+          <Route
             path="/artist/dashboard/upload-music"
             element={<UploadMusic />}
           />
-          <Route path="/music/:id" element={<MusicPlayer />} /> */}
+          {/* <Route path="/music/:id" element={<MusicPlayer />} /> */}
         </Routes>
       </main>
     </div>

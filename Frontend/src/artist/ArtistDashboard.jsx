@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./ArtistDashboard.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const ArtistDashboard = () => {
+  const navigate = useNavigate();
+
   const [musics, setMusics] = useState([
     {
       id: 1,
@@ -68,9 +72,13 @@ const ArtistDashboard = () => {
       "http://localhost:3002/api/music/playlist/artist",
       { withCredentials: true }
     );
-      console.log("PLAYLIST DATA:", response.data.data);
+      console.log("PLAYLIST DATA:", response.data.playlists);
     setPlaylists(response.data.playlists);
   };
+
+  const uploadMusic = () =>{
+    navigate("/artist/dashboard/upload-music")
+  }
 
   useEffect(() => {
     gerArtistMusic();
@@ -87,7 +95,7 @@ const ArtistDashboard = () => {
       <section className="section-container">
         <div className="section-header">
           <h2 className="section-title">My Music</h2>
-          <button className="action-btn">+ Upload Music</button>
+          <button onClick={uploadMusic} className="action-btn">+ Upload Music</button>
         </div>
         <div className="grid-layout">
           {musics.map((music) => (
