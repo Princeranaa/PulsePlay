@@ -84,8 +84,9 @@ export default function Home() {
         <div className="music-grid">
           {musics.map(m => (
             <div
-              onClick={() => {
-               " " 
+                onClick={() => {
+                // socket?.emit("play", { musicId: m.id })
+                navigate(`/music/${m.id}`)
               }}
               key={m.id} className="music-card surface" tabIndex={0}>
               <div className="music-cover-wrap">

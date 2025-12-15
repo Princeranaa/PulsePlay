@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ArtistDashboard from "./artist/ArtistDashboard";
 import UploadMusic from "./artist/UploadMusic";
+import MusicPlayer from "./music/MusicPlayer";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             path="/artist/dashboard/upload-music"
             element={<UploadMusic />}
           />
-          {/* <Route path="/music/:id" element={<MusicPlayer />} /> */}
+          <Route path="/music/:id" element={<MusicPlayer />} />
         </Routes>
       </main>
     </div>
