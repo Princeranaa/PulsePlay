@@ -93,9 +93,9 @@ export default function MusicPlayer() {
   }, [playbackRate]);
 
   // Auto navigate if invalid id
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3002/api/music/get-details/${id}`, {
+
+  const getTrackDetails = async () => {
+    const response = await axios.get(`http://localhost:3002/api/music/get-details/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -103,8 +103,12 @@ export default function MusicPlayer() {
       })
       .catch((err) => {
         console.error(err);
-        // navigate('/')
+        
       });
+  };
+
+  useEffect(() => {
+    getTrackDetails()
   }, []);
 
   if (!track) {
@@ -112,90 +116,89 @@ export default function MusicPlayer() {
     return <div>Loading...</div>;
   }
 
-return (
-  <div className="music-player-page">
-    <header className="player-header">
-      <button className="back-btn" onClick={() => navigate(-1)}>
-        ← Back
-      </button>
-    </header>
-
-    <div className="player-card">
-      <div className="cover-wrapper">
-        <img
-          src={track.coverImageKey}
-          alt={track.title}
-          className="player-cover"
-        />
-      </div>
-
-      <div className="player-info">
-        <h2 className="track-title">{track.title}</h2>
-        <p className="track-artist">{track.artist}</p>
-      </div>
-
-      <audio
-        ref={audioRef}
-        src={track.musicKey}
-        preload="metadata"
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={() => setIsPlaying(false)}
-        autoPlay
-      />
-
-      {/* Progress */}
-      <div className="progress-section">
-        <span>{formatTime(currentTime)}</span>
-        <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          step="0.1"
-          value={currentTime}
-          onChange={handleProgressChange}
-        />
-        <span>{formatTime(duration)}</span>
-      </div>
-
-      {/* Controls */}
-      <div className="controls">
-        <button onClick={() => skip(-10)}>⏪</button>
-
-        <button className="play-btn" onClick={togglePlay}>
-          {isPlaying ? "⏸" : "▶"}
+  return (
+    <div className="music-player-page">
+      <header className="player-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Back
         </button>
+      </header>
 
-        <button onClick={() => skip(10)}>⏩</button>
-      </div>
+      <div className="player-card">
+        <div className="cover-wrapper">
+          <img
+            src={track.coverImageKey}
+            alt={track.title}
+            className="player-cover"
+          />
+        </div>
 
-      {/* Extras */}
-      <div className="extras">
-        <div className="extra-control">
-          <label>Volume</label>
+        <div className="player-info">
+          <h2 className="track-title">{track.title}</h2>
+          <p className="track-artist">{track.artist}</p>
+        </div>
+
+        <audio
+          ref={audioRef}
+          src={track.musicKey}
+          preload="metadata"
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={() => setIsPlaying(false)}
+          autoPlay
+        />
+
+        {/* Progress */}
+        <div className="progress-section">
+          <span>{formatTime(currentTime)}</span>
           <input
             type="range"
             min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolumeChange}
+            max={duration || 0}
+            step="0.1"
+            value={currentTime}
+            onChange={handleProgressChange}
           />
+          <span>{formatTime(duration)}</span>
         </div>
 
-        <div className="extra-control">
-          <label>Speed {playbackRate}x</label>
-          <input
-            type="range"
-            min="0.5"
-            max="2"
-            step="0.25"
-            value={playbackRate}
-            onChange={handleRateChange}
-          />
+        {/* Controls */}
+        <div className="controls">
+          <button onClick={() => skip(-10)}>⏪</button>
+
+          <button className="play-btn" onClick={togglePlay}>
+            {isPlaying ? "⏸" : "▶"}
+          </button>
+
+          <button onClick={() => skip(10)}>⏩</button>
+        </div>
+
+        {/* Extras */}
+        <div className="extras">
+          <div className="extra-control">
+            <label>Volume</label>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </div>
+
+          <div className="extra-control">
+            <label>Speed {playbackRate}x</label>
+            <input
+              type="range"
+              min="0.5"
+              max="2"
+              step="0.25"
+              value={playbackRate}
+              onChange={handleRateChange}
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
-
+  );
 }
