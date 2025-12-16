@@ -17,13 +17,18 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
+    // 1. Make the function 'async'
     e.preventDefault();
+    // You might want to show a loading state here
+    // setLoading(true);
+
     const payload = {
       email: form.email,
       password: form.password,
     };
 
     try {
+      // 2. Use 'await' to pause execution until the request finishes
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
         payload,
@@ -33,18 +38,22 @@ function Login() {
       // 3. ONLY navigate if the request was successful
       if (response.status === 200) {
         toast.success("Login successful");
+        // Optional: Save user data/token here
         navigate("/");
       }
     } catch (error) {
-      
+      // 4. Handle errors (like 401 Unauthorized, 404 Not Found, etc.)
       console.error("Login failed:", error);
+
+      // Use a state variable (e.g., const [errorMsg, setErrorMsg] = useState(''))
+      // to show an error message to the user on the login form.
       let message = "An error occurred during login.";
       if (
         error.response &&
         error.response.data &&
         error.response.data.message
       ) {
-        message = error.response.data.message; 
+        message = error.response.data.message; // Get error message from the backend
       }
       toast.error(message); 
     }

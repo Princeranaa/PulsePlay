@@ -3,7 +3,7 @@ import './Home.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-export default function Home() {
+export default function Home({socket}) {
   const navigate = useNavigate();
 
   const [ musics, setMusics ] = useState(
@@ -85,7 +85,7 @@ export default function Home() {
           {musics.map(m => (
             <div
                 onClick={() => {
-                // socket?.emit("play", { musicId: m.id })
+                socket?.emit("play", { musicId: m.id })
                 navigate(`/music/${m.id}`)
               }}
               key={m.id} className="music-card surface" tabIndex={0}>
