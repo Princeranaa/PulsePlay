@@ -15,21 +15,47 @@ function Login() {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    // 1. Make the function 'async'
     e.preventDefault();
-    console.log("Login Attempt:", form);
+    // You might want to show a loading state here
+    // setLoading(true);
 
     const payload = {
       email: form.email,
       password: form.password,
     };
-    const response = axios.post(
-      "http://localhost:3000/api/auth/login",
-      payload,
-      { withCredentials: true }
-    );
 
-    navigate("/");
+    try {
+      // 2. Use 'await' to pause execution until the request finishes
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        payload,
+        { withCredentials: true }
+      );
+
+      // 3. ONLY navigate if the request was successful
+      if (response.status === 200) {
+        // Optional: Save user data/token here
+        navigate("/");
+      }
+    } catch (error) {
+      // 4. Handle errors (like 401 Unauthorized, 404 Not Found, etc.)
+      console.error("Login failed:", error);
+
+      // Use a state variable (e.g., const [errorMsg, setErrorMsg] = useState(''))
+      // to show an error message to the user on the login form.
+      let message = "An error occurred during login.";
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        message = error.response.data.message; // Get error message from the backend
+      }
+      alert(message); 
+    }
+    
   };
 
   return (
@@ -72,9 +98,11 @@ function Login() {
           </button>
         </form>
 
-        <div onClick={() => {
-              window.location.href = "http://localhost:3000/api/auth/google";
-            }}>
+        <div
+          onClick={() => {
+            window.location.href = "http://localhost:3000/api/auth/google";
+          }}
+        >
           <div className="divider">
             <span>or continue with</span>
           </div>

@@ -5,8 +5,24 @@ import Home from "./pages/Home";
 import ArtistDashboard from "./artist/ArtistDashboard";
 import UploadMusic from "./artist/UploadMusic";
 import MusicPlayer from "./music/MusicPlayer";
+import { io } from "socket.io-client";
+import { useState, useEffect } from "react";
 
 function App() {
+  
+  const [socket, setSocket] = useState(null);
+  
+  useEffect(()=>{
+
+    const newSocket = io("http://localhost:3002", {
+      withCredentials:true
+    });
+    
+    setSocket(newSocket)
+
+  },[])
+
+
   return (
     <div>
       <main>
